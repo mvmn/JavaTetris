@@ -15,6 +15,26 @@ public class ФігураБукваТ extends ФігураЗОбертом {
 
   @Override
   protected boolean заповненістьВраховуючиОберт(int x, int y) {
-    return y == 1 || x == 1;
+    return y == 1 || x == 0;
+  }
+
+  @Override
+  public int зміщенняОбертуX() {
+    if (поворот == 0) {
+      return -1;
+    } else if (поворот == 3) {
+      return 1;
+    }
+    return 0;
+  }
+
+  @Override
+  public int зміщенняОбертуY() {
+    if (поворот == 0) {
+      return 1;
+    } else if (поворот == 1) {
+      return -1;
+    }
+    return 0;
   }
 }
