@@ -4,7 +4,7 @@ import javax.swing.SwingUtilities;
 import x.mvmn.games.tetris.відображення.ГоловнеВікно;
 import x.mvmn.games.tetris.сервіс.РушійГри;
 
-public class Тетріс {
+public class Tetris {
 
   public static void main(String[] args) {
     ГоловнеВікно головнеВікно = new ГоловнеВікно();
