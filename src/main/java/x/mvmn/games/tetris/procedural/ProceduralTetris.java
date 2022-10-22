@@ -27,8 +27,8 @@ public class ProceduralTetris {
     private static int поточнаФігура_X;
     private static int поточнаФігура_Y;
     private static Color поточнаФігура_Колір;
-    private static boolean граВПроцесі;
-    private static Color[][] наскладаніКубики = new Color[10][19];
+    private static volatile boolean граВПроцесі;
+    private static Color[][] наскладаніКубики = new Color[10][15];
     private static Color[] кольори = {Color.RED, Color.GREEN, Color.BLUE, Color.CYAN, Color.MAGENTA,
             Color.YELLOW.darker(), Color.ORANGE, Color.PINK};
     private static Random генераторВипадковихЧисел = new Random();
@@ -40,11 +40,13 @@ public class ProceduralTetris {
 
     public static void main(String args[]) {
         створитиВікноГри();
+        граВПроцесі = false;
         while (!попросилиВихід) {
-            передПочатокГри();
+            вміст.repaint();
             while (!граВПроцесі && !попросилиВихід) {
                 Thread.yield();
             }
+            передПочатокГри();
             while (граВПроцесі && !попросилиВихід) {
                 крокГри();
                 try {
@@ -154,7 +156,7 @@ public class ProceduralTetris {
         }
 
         // Наскладані кубики
-        for (int y = 0; y < 19; y++) {
+        for (int y = 0; y < 15; y++) {
             for (int x = 0; x < 10; x++) {
                 Color колір = наскладаніКубики[x][y];
                 if (колір != null) {
@@ -209,11 +211,10 @@ public class ProceduralTetris {
     private static void передПочатокГри() {
         рахунок = 0;
         рівень = 0;
-        граВПроцесі = false;
         кількістьКроківДоПониженняФігури = повільністьПочатковогоРівня;
         поточнаКількістьКроківДоПониженняФігури = кількістьКроківДоПониженняФігури;
         for (int i = 0; i < 10; i++) {
-            for (int k = 0; k < 19; k++) {
+            for (int k = 0; k < 15; k++) {
                 наскладаніКубики[i][k] = null;
             }
         }
@@ -299,7 +300,7 @@ public class ProceduralTetris {
     private static boolean колізіяЗНаскладанимиКубіками(boolean[][] фігура, int fx, int fy) {
         for (int y = 0; y < фігура.length; y++) {
             for (int x = 0; x < фігура[y].length; x++) {
-                if (наскладаніКубики[fx + x][fy + y] != null && фігура[y][x]) {
+                if (fy+y<15 && наскладаніКубики[fx + x][fy + y] != null && фігура[y][x]) {
                     return true;
                 }
             }
