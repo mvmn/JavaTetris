@@ -1,8 +1,8 @@
-package x.mvmn.games.tetris;
+package x.mvmn.games.tetris.oop;
 
 import javax.swing.SwingUtilities;
-import x.mvmn.games.tetris.відображення.ГоловнеВікно;
-import x.mvmn.games.tetris.сервіс.РушійГри;
+import x.mvmn.games.tetris.oop.відображення.ГоловнеВікно;
+import x.mvmn.games.tetris.oop.сервіс.РушійГри;
 
 public class Tetris {
 

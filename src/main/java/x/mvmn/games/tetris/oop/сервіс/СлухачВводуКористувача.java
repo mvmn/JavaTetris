@@ -1,4 +1,4 @@
-package x.mvmn.games.tetris.сервіс;
+package x.mvmn.games.tetris.oop.сервіс;
 
 public interface СлухачВводуКористувача {
 

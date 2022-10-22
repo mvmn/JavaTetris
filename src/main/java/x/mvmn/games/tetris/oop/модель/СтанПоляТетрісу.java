@@ -1,7 +1,7 @@
-package x.mvmn.games.tetris.модель;
+package x.mvmn.games.tetris.oop.модель;
 
 import java.awt.Color;
-import x.mvmn.games.tetris.модель.фігури.Фігура;
+import x.mvmn.games.tetris.oop.модель.фігури.Фігура;
 
 public class СтанПоляТетрісу {
 
@@ -19,13 +19,6 @@ public class СтанПоляТетрісу {
     return стан[x][y];
   }
 
-  /**
-   * 
-   * @param фігура
-   * @param x
-   * @param y
-   * @return кількість заповнених рядків
-   */
   public int приземлитиФігуру(ПоточнаФігура поточнаФігура) {
     Фігура фігура = поточнаФігура.фігура();
     int fx = поточнаФігура.x();

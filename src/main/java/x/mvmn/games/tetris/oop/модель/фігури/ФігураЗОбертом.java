@@ -1,4 +1,4 @@
-package x.mvmn.games.tetris.модель.фігури;
+package x.mvmn.games.tetris.oop.модель.фігури;
 
 import java.awt.Color;
 

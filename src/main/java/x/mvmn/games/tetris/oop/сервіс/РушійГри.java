@@ -1,11 +1,11 @@
-package x.mvmn.games.tetris.сервіс;
+package x.mvmn.games.tetris.oop.сервіс;
 
-import x.mvmn.games.tetris.відображення.ГоловнеВікно;
-import x.mvmn.games.tetris.відображення.КомпонентПолеТетрісу;
-import x.mvmn.games.tetris.відображення.КомпонентЧисловийІндикатор;
-import x.mvmn.games.tetris.модель.ПоточнаФігура;
-import x.mvmn.games.tetris.модель.СтанГри;
-import x.mvmn.games.tetris.модель.фігури.Фігура;
+import x.mvmn.games.tetris.oop.відображення.ГоловнеВікно;
+import x.mvmn.games.tetris.oop.відображення.КомпонентПолеТетрісу;
+import x.mvmn.games.tetris.oop.відображення.КомпонентЧисловийІндикатор;
+import x.mvmn.games.tetris.oop.модель.ПоточнаФігура;
+import x.mvmn.games.tetris.oop.модель.СтанГри;
+import x.mvmn.games.tetris.oop.модель.фігури.Фігура;
 
 public class РушійГри implements СлухачВводуКористувача {
 

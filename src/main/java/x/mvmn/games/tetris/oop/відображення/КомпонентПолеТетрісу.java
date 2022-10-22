@@ -1,10 +1,10 @@
-package x.mvmn.games.tetris.відображення;
+package x.mvmn.games.tetris.oop.відображення;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import x.mvmn.games.tetris.модель.ПоточнаФігура;
-import x.mvmn.games.tetris.модель.СтанПоляТетрісу;
+import x.mvmn.games.tetris.oop.модель.ПоточнаФігура;
+import x.mvmn.games.tetris.oop.модель.СтанПоляТетрісу;
 
 public class КомпонентПолеТетрісу implements КомпонентВідображення {
 
