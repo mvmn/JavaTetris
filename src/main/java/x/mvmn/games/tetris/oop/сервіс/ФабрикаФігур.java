@@ -1,15 +1,15 @@
-package x.mvmn.games.tetris.сервіс;
+package x.mvmn.games.tetris.oop.сервіс;
 
 import java.awt.Color;
 import java.util.Random;
-import x.mvmn.games.tetris.модель.фігури.Фігура;
-import x.mvmn.games.tetris.модель.фігури.ФігураБукваТ;
-import x.mvmn.games.tetris.модель.фігури.ФігураГачокЛівий;
-import x.mvmn.games.tetris.модель.фігури.ФігураГачокПравий;
-import x.mvmn.games.tetris.модель.фігури.ФігураЗигзагЛівий;
-import x.mvmn.games.tetris.модель.фігури.ФігураЗигзагПравий;
-import x.mvmn.games.tetris.модель.фігури.ФігураКвадрат;
-import x.mvmn.games.tetris.модель.фігури.ФігураПряма;
+import x.mvmn.games.tetris.oop.модель.фігури.Фігура;
+import x.mvmn.games.tetris.oop.модель.фігури.ФігураБукваТ;
+import x.mvmn.games.tetris.oop.модель.фігури.ФігураГачокЛівий;
+import x.mvmn.games.tetris.oop.модель.фігури.ФігураГачокПравий;
+import x.mvmn.games.tetris.oop.модель.фігури.ФігураЗигзагЛівий;
+import x.mvmn.games.tetris.oop.модель.фігури.ФігураЗигзагПравий;
+import x.mvmn.games.tetris.oop.модель.фігури.ФігураКвадрат;
+import x.mvmn.games.tetris.oop.модель.фігури.ФігураПряма;
 
 public class ФабрикаФігур {
   private static final Color[] кольори = {Color.RED, Color.GREEN, Color.BLUE, Color.CYAN,

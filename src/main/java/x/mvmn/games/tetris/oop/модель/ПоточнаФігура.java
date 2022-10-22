@@ -1,6 +1,6 @@
-package x.mvmn.games.tetris.модель;
+package x.mvmn.games.tetris.oop.модель;
 
-import x.mvmn.games.tetris.модель.фігури.Фігура;
+import x.mvmn.games.tetris.oop.модель.фігури.Фігура;
 
 public class ПоточнаФігура {
   private Фігура фігура;

@@ -1,4 +1,4 @@
-package x.mvmn.games.tetris.модель;
+package x.mvmn.games.tetris.oop.модель;
 
 public class СтанГри {
 

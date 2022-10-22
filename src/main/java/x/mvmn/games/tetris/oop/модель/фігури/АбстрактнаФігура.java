@@ -1,4 +1,4 @@
-package x.mvmn.games.tetris.модель.фігури;
+package x.mvmn.games.tetris.oop.модель.фігури;
 
 import java.awt.Color;
 
@@ -30,7 +30,7 @@ public abstract class АбстрактнаФігура implements Фігура {
     return колір;
   }
 
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     Фігура f = new ФігураБукваТ(Color.RED, 1);
     for (int i = 0; i < 10; i++) {
       for (int y = 0; y < f.висота(); y++) {
@@ -39,7 +39,7 @@ public abstract class АбстрактнаФігура implements Фігура {
         }
         System.out.println();
       }
-      System.out.println("");
+      System.out.println();
       f = f.обернути();
     }
   }
