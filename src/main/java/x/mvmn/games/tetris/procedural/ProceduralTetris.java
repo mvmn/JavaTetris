@@ -120,13 +120,13 @@ public class ProceduralTetris {
         SwingUtilities.invokeLater(() -> вікно.setVisible(true));
     }
 
-    private static void відмалюватиФігуру(Graphics g, int зміщенняX, int зміщенняY, boolean[][] фігура, Color колірФігури) {
+    private static void відмалюватиФігуру(Graphics g, int зміщенняX, int зміщенняY, boolean[][] фігура, Color колірФігури, boolean анімація) {
         for (int y = 0; y < фігура.length; y++) {
             for (int x = 0; x < фігура[y].length; x++) {
                 if (фігура[y][x]) {
                     замалюватиКвадратикФігури(g, колірФігури,
                             зміщенняX + 40 * x,
-                            зміщенняY + 40 * y);
+                            зміщенняY + 40 * y, анімація);
                 }
             }
         }
@@ -161,8 +161,10 @@ public class ProceduralTetris {
         if (граВПроцесі) {
             int зміщенняX = відступ_X + поточнаФігура_X * 40;
             int зміщенняY = відступ_Y + поточнаФігура_Y * 40;
-            відмалюватиФігуру(g, зміщенняX, зміщенняY, поточнаФігура, поточнаФігура_Колір);
-            відмалюватиФігуру(g, 422 + 370 / 2 - ширинаФігури(наступнаФігура) * 40 / 2, 108 + 370 / 2 - висотаФігури(наступнаФігура) * 40 / 2, наступнаФігура, наступнаФігура_Колір);
+            відмалюватиФігуру(g, зміщенняX, зміщенняY, поточнаФігура, поточнаФігура_Колір, true);
+            відмалюватиФігуру(g, 422 + 370 / 2 - ширинаФігури(наступнаФігура) * 40 / 2,
+                    108 + 370 / 2 - висотаФігури(наступнаФігура) * 40 / 2,
+                    наступнаФігура, наступнаФігура_Колір, false);
         }
 
         // Наскладані кубики
@@ -170,7 +172,7 @@ public class ProceduralTetris {
             for (int x = 0; x < 10; x++) {
                 Color колір = наскладаніКубики[x][y];
                 if (колір != null) {
-                    замалюватиКвадратикФігури(g, колір, відступ_X + 40 * x, відступ_Y + 40 * y);
+                    замалюватиКвадратикФігури(g, колір, відступ_X + 40 * x, відступ_Y + 40 * y, false);
                 }
             }
         }
@@ -266,13 +268,24 @@ public class ProceduralTetris {
         попросилиВихід = true;
     }
 
-    private static void замалюватиКвадратикФігури(Graphics g, Color колір, int x, int y) {
-        g.setColor(колір);
-        g.fillRect(x + 4, y + 4, 36, 36);
-        g.setColor(Color.WHITE);
-        g.fillRect(x + 8, y + 8, 28, 28);
-        g.setColor(колір);
-        g.fillRect(x + 14, y + 14, 16, 16);
+    private static void замалюватиКвадратикФігури(Graphics g, Color колір, int x, int y, boolean анімація) {
+        if (анімація) {
+            int animationValue = Math.abs(32 - (int) (System.currentTimeMillis() / 10 % 64));
+            g.setColor(колір);
+            g.fillRoundRect(x + 4, y + 4, 36, 36, animationValue / 2, animationValue / 2);
+            float[] hsb = Color.RGBtoHSB(колір.getRed(), колір.getGreen(), колір.getBlue(), null);
+            g.setColor(Color.getHSBColor(0.5f - hsb[0], 0 + animationValue / 64.f, 1f));
+            g.fillRoundRect(x + 8, y + 8, 28, 28, animationValue / 2, animationValue / 2);
+            g.setColor(колір);
+            g.fillOval(x + 14 + animationValue / 8, y + 14 + animationValue / 8, 16 - animationValue / 4, 16 - animationValue / 4);
+        } else {
+            g.setColor(колір);
+            g.fillRoundRect(x + 4, y + 4, 36, 36, 8, 8);
+            g.setColor(Color.WHITE);
+            g.fillRoundRect(x + 8, y + 8, 28, 28, 16, 16);
+            g.setColor(колір);
+            g.fillOval(x + 14, y + 14, 16, 16);
+        }
     }
 
     private static int висотаФігури(boolean[][] фігура) {
