@@ -23,10 +23,12 @@ public class ProceduralTetris {
     private static int кількістьКроківДоПониженняФігури;
     private static int поточнаКількістьКроківДоПониженняФігури;
     private static volatile boolean попросилиВихід = false;
+    private static boolean[][] наступнаФігура;
+    private static Color наступнаФігура_Колір;
     private static boolean[][] поточнаФігура;
+    private static Color поточнаФігура_Колір;
     private static int поточнаФігура_X;
     private static int поточнаФігура_Y;
-    private static Color поточнаФігура_Колір;
     private static volatile boolean граВПроцесі;
     private static Color[][] наскладаніКубики = new Color[10][15];
     private static Color[] кольори = {Color.RED, Color.GREEN, Color.BLUE, Color.CYAN, Color.MAGENTA,
@@ -38,7 +40,7 @@ public class ProceduralTetris {
 
     private static int поточнаКількістьРядківДоНаступогоРівня = кількістьРядківДоНаступогоРівня;
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         створитиВікноГри();
         граВПроцесі = false;
         while (!попросилиВихід) {
@@ -118,6 +120,18 @@ public class ProceduralTetris {
         SwingUtilities.invokeLater(() -> вікно.setVisible(true));
     }
 
+    private static void відмалюватиФігуру(Graphics g, int зміщенняX, int зміщенняY, boolean[][] фігура, Color колірФігури) {
+        for (int y = 0; y < фігура.length; y++) {
+            for (int x = 0; x < фігура[y].length; x++) {
+                if (фігура[y][x]) {
+                    замалюватиКвадратикФігури(g, колірФігури,
+                            зміщенняX + 40 * x,
+                            зміщенняY + 40 * y);
+                }
+            }
+        }
+    }
+
     private static void відмальовка(Graphics g) {
         int відступ_X = 8;
         int відступ_Y = 8;
@@ -136,23 +150,19 @@ public class ProceduralTetris {
         // Рахунок і рівень
         g.fill3DRect(422, 8, 370, 40, true);
         g.fill3DRect(422, 58, 370, 40, true);
+        g.fill3DRect(422, 108, 370, 370, true);
 
         g.setColor(Color.WHITE);
         g.drawString("Рахунок: " + рахунок, 430, 32);
         g.drawString("Рівень: " + рівень, 430, 82);
+        g.drawString("Наступна фігура: ", 430, 132);
 
         // Поточна фігура
         if (граВПроцесі) {
-            boolean[][] фігура = поточнаФігура;
-            for (int y = 0; y < фігура.length; y++) {
-                for (int x = 0; x < фігура[y].length; x++) {
-                    if (фігура[y][x]) {
-                        замалюватиКвадратикФігури(g, поточнаФігура_Колір,
-                                відступ_X + 40 * x + поточнаФігура_X * 40,
-                                відступ_Y + 40 * y + поточнаФігура_Y * 40);
-                    }
-                }
-            }
+            int зміщенняX = відступ_X + поточнаФігура_X * 40;
+            int зміщенняY = відступ_Y + поточнаФігура_Y * 40;
+            відмалюватиФігуру(g, зміщенняX, зміщенняY, поточнаФігура, поточнаФігура_Колір);
+            відмалюватиФігуру(g, 422 + 370 / 2 - ширинаФігури(наступнаФігура) * 40 / 2, 108 + 370 / 2 - висотаФігури(наступнаФігура) * 40 / 2, наступнаФігура, наступнаФігура_Колір);
         }
 
         // Наскладані кубики
@@ -221,15 +231,24 @@ public class ProceduralTetris {
         наступнаФігура();
     }
 
+    private static void створитиНаступнуФігуру() {
+        наступнаФігура = Фігури.ФІГУРИ[генераторВипадковихЧисел.nextInt(Фігури.ФІГУРИ.length)];
+        Color попереднійКолір = наступнаФігура_Колір;
+        do {
+            наступнаФігура_Колір = кольори[генераторВипадковихЧисел.nextInt(кольори.length)];
+        } while (попереднійКолір != null && попереднійКолір == наступнаФігура_Колір);
+    }
+
     private static void наступнаФігура() {
-        поточнаФігура = Фігури.ФІГУРИ[генераторВипадковихЧисел.nextInt(Фігури.ФІГУРИ.length)];
+        if (наступнаФігура == null) {
+            створитиНаступнуФігуру();
+        }
+
+        поточнаФігура = наступнаФігура;
+        поточнаФігура_Колір = наступнаФігура_Колір;
         поточнаФігура_X = 5 - ширинаФігури(поточнаФігура) / 2;
         поточнаФігура_Y = 0;
-        Color попереднійКолір = поточнаФігура_Колір;
-        поточнаФігура_Колір = кольори[генераторВипадковихЧисел.nextInt(кольори.length)];
-        while (попереднійКолір != null && попереднійКолір == поточнаФігура_Колір) {
-            поточнаФігура_Колір = кольори[генераторВипадковихЧисел.nextInt(кольори.length)];
-        }
+        створитиНаступнуФігуру();
     }
 
     private static void наступнийРівень() {
@@ -300,7 +319,7 @@ public class ProceduralTetris {
     private static boolean колізіяЗНаскладанимиКубіками(boolean[][] фігура, int fx, int fy) {
         for (int y = 0; y < фігура.length; y++) {
             for (int x = 0; x < фігура[y].length; x++) {
-                if (fy+y<15 && наскладаніКубики[fx + x][fy + y] != null && фігура[y][x]) {
+                if (fy + y < 15 && наскладаніКубики[fx + x][fy + y] != null && фігура[y][x]) {
                     return true;
                 }
             }
