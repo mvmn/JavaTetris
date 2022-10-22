@@ -1,35 +1,35 @@
 package x.mvmn.games.tetris.oop.модель.фігури;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class ФігураКвадрат extends АбстрактнаФігура {
 
-  public ФігураКвадрат(Color колір) {
-    super(колір);
-  }
+    public ФігураКвадрат(Color колір) {
+        super(колір);
+    }
 
-  @Override
-  public int ширина() {
-    return 2;
-  }
+    @Override
+    public int ширина() {
+        return 2;
+    }
 
-  @Override
-  public int висота() {
-    return 2;
-  }
+    @Override
+    public int висота() {
+        return 2;
+    }
 
-  @Override
-  public boolean заповненість(int x, int y) {
-    return true;
-  }
+    @Override
+    public boolean заповненість(int x, int y) {
+        return true;
+    }
 
-  @Override
-  public Фігура обернути() {
-    return this;
-  }
+    @Override
+    public Фігура обернути() {
+        return this;
+    }
 
-  @Override
-  public boolean обертається() {
-    return false;
-  }
+    @Override
+    public boolean обертається() {
+        return false;
+    }
 }

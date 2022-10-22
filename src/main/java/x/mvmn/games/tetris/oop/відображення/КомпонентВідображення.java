@@ -1,8 +1,8 @@
 package x.mvmn.games.tetris.oop.відображення;
 
-import java.awt.Graphics;
+import java.awt.*;
 
 public interface КомпонентВідображення {
 
-  void промалювати(Graphics графіка);
+    void промалювати(Graphics графіка);
 }

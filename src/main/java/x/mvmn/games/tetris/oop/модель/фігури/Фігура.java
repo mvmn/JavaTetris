@@ -1,22 +1,22 @@
 package x.mvmn.games.tetris.oop.модель.фігури;
 
-import java.awt.Color;
+import java.awt.*;
 
 public interface Фігура {
 
-  int ширина();
+    int ширина();
 
-  int висота();
+    int висота();
 
-  boolean заповненість(int x, int y);
+    boolean заповненість(int x, int y);
 
-  boolean обертається();
+    boolean обертається();
 
-  int зміщенняОбертуX();
+    int зміщенняОбертуX();
 
-  int зміщенняОбертуY();
+    int зміщенняОбертуY();
 
-  Фігура обернути();
+    Фігура обернути();
 
-  Color колір();
+    Color колір();
 }
