@@ -10,6 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.geom.Rectangle2D;
 import java.util.Random;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -30,6 +31,7 @@ public class ProceduralTetris {
     private static int поточнаФігура_X;
     private static int поточнаФігура_Y;
     private static volatile boolean граВПроцесі;
+    private static volatile boolean пауза;
     private static Color[][] наскладаніКубики = new Color[10][15];
     private static Color[] кольори = {Color.RED, Color.GREEN, Color.BLUE, Color.CYAN, Color.MAGENTA,
             Color.YELLOW.darker(), Color.ORANGE, Color.PINK};
@@ -85,9 +87,13 @@ public class ProceduralTetris {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     if (!граВПроцесі) {
                         граВПроцесі = true;
+                    } else if (пауза) {
+                        пауза = false;
                     }
                 } else if (граВПроцесі) {
-                    if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    if (e.getKeyCode() == KeyEvent.VK_P) {
+                        пауза = !пауза;
+                    } else if (e.getKeyCode() == KeyEvent.VK_UP) {
                         обeртФігури();
                     } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                         пониженняФігури();
@@ -132,37 +138,37 @@ public class ProceduralTetris {
         }
     }
 
-    private static void відмальовка(Graphics g) {
+    private static void відмальовка(Graphics графіка) {
         int відступ_X = 8;
         int відступ_Y = 8;
 
         // Фон
-        g.setColor(Color.DARK_GRAY);
-        g.fillRect(відступ_X, відступ_Y, 404, 604);
-        g.setColor(Color.BLACK);
+        графіка.setColor(Color.DARK_GRAY);
+        графіка.fillRect(відступ_X, відступ_Y, 404, 604);
+        графіка.setColor(Color.BLACK);
         for (int i = 0; i < 11; i++) {
-            g.fillRect(відступ_X + 1 + i * 40, відступ_Y + 1, 2, 602);
+            графіка.fillRect(відступ_X + 1 + i * 40, відступ_Y + 1, 2, 602);
         }
         for (int i = 0; i < 16; i++) {
-            g.fillRect(відступ_X + 1, відступ_Y + 1 + i * 40, 402, 2);
+            графіка.fillRect(відступ_X + 1, відступ_Y + 1 + i * 40, 402, 2);
         }
 
         // Рахунок і рівень
-        g.fill3DRect(422, 8, 370, 40, true);
-        g.fill3DRect(422, 58, 370, 40, true);
-        g.fill3DRect(422, 108, 370, 370, true);
+        графіка.fill3DRect(422, 8, 370, 40, true);
+        графіка.fill3DRect(422, 58, 370, 40, true);
+        графіка.fill3DRect(422, 108, 370, 370, true);
 
-        g.setColor(Color.WHITE);
-        g.drawString("Рахунок: " + рахунок, 430, 32);
-        g.drawString("Рівень: " + рівень, 430, 82);
-        g.drawString("Наступна фігура: ", 430, 132);
+        графіка.setColor(Color.WHITE);
+        графіка.drawString("Рахунок: " + рахунок, 430, 32);
+        графіка.drawString("Рівень: " + рівень, 430, 82);
+        графіка.drawString("Наступна фігура: ", 430, 132);
 
         // Поточна фігура
         if (граВПроцесі) {
             int зміщенняX = відступ_X + поточнаФігура_X * 40;
             int зміщенняY = відступ_Y + поточнаФігура_Y * 40;
-            відмалюватиФігуру(g, зміщенняX, зміщенняY, поточнаФігура, поточнаФігура_Колір, true);
-            відмалюватиФігуру(g, 422 + 370 / 2 - ширинаФігури(наступнаФігура) * 40 / 2,
+            відмалюватиФігуру(графіка, зміщенняX, зміщенняY, поточнаФігура, поточнаФігура_Колір, true);
+            відмалюватиФігуру(графіка, 422 + 370 / 2 - ширинаФігури(наступнаФігура) * 40 / 2,
                     108 + 370 / 2 - висотаФігури(наступнаФігура) * 40 / 2,
                     наступнаФігура, наступнаФігура_Колір, false);
         }
@@ -172,30 +178,36 @@ public class ProceduralTetris {
             for (int x = 0; x < 10; x++) {
                 Color колір = наскладаніКубики[x][y];
                 if (колір != null) {
-                    замалюватиКвадратикФігури(g, колір, відступ_X + 40 * x, відступ_Y + 40 * y, false);
+                    замалюватиКвадратикФігури(графіка, колір, відступ_X + 40 * x, відступ_Y + 40 * y, false);
                 }
             }
         }
 
         // Текст
-        if (!граВПроцесі) {
-            Font шрифт = g.getFont();
-            g.setFont(шрифт.deriveFont(шрифт.getSize() + 10.0f));
-            int ширинаТексту =
-                    (int) g.getFontMetrics().getStringBounds("Натисніть ПРОБІЛ щоб почати", g).getWidth();
-            g.setColor(Color.BLACK);
-            g.drawString("Натисніть ПРОБІЛ щоб почати", 7 + (404 - ширинаТексту) / 2, 299);
-            g.drawString("Натисніть ПРОБІЛ щоб почати", 9 + (404 - ширинаТексту) / 2, 301);
-            g.drawString("Натисніть ПРОБІЛ щоб почати", 7 + (404 - ширинаТексту) / 2, 301);
-            g.drawString("Натисніть ПРОБІЛ щоб почати", 9 + (404 - ширинаТексту) / 2, 299);
-            g.setColor(Color.WHITE);
-            g.drawString("Натисніть ПРОБІЛ щоб почати", 8 + (404 - ширинаТексту) / 2, 300);
-            g.setFont(шрифт);
+        if (!граВПроцесі || пауза) {
+            Font шрифт = графіка.getFont();
+            графіка.setFont(шрифт.deriveFont(шрифт.getSize() + 10.0f));
+            String текст = !граВПроцесі ? "Натисніть ПРОБІЛ щоб почати" : "Пауза";
+            Rectangle2D розмірТексту = графіка.getFontMetrics().getStringBounds(текст, графіка);
+            int ширинаТексту = (int) розмірТексту.getWidth();
+            int висотаТексту = (int) розмірТексту.getHeight();
+            графіка.setColor(Color.BLACK);
+            графіка.fillRoundRect(відступ_X + (404 - ширинаТексту - 10) / 2,
+                    відступ_Y + 300 - 5 + (int) розмірТексту.getY(), ширинаТексту + 10, висотаТексту + 10, 30,
+                    30);
+            графіка.setColor(Color.WHITE);
+            графіка.drawString(текст, відступ_X + (404 - ширинаТексту) / 2, відступ_Y + 300);
+            графіка.setFont(шрифт);
         }
     }
 
     private static void крокГри() {
         вміст.repaint();
+
+        if (пауза) {
+            Thread.yield();
+            return;
+        }
 
         // Опускаєм фігуру
         поточнаКількістьКроківДоПониженняФігури--;
@@ -231,6 +243,7 @@ public class ProceduralTetris {
             }
         }
         наступнаФігура();
+        пауза = false;
     }
 
     private static void створитиНаступнуФігуру() {

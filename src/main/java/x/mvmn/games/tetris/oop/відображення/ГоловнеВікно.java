@@ -72,6 +72,8 @@ public class ГоловнеВікно extends JFrame {
           слухачВводу.натиснутоВліво();
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
           слухачВводу.натиснутоВправо();
+        } else if(e.getKeyCode() == KeyEvent.VK_P) {
+          слухачВводу.натиснутоПаузу();
         }
       }
     });
