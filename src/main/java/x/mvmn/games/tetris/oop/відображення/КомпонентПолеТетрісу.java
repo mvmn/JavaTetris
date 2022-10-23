@@ -76,7 +76,8 @@ public class КомпонентПолеТетрісу implements Компоне�
         BufferedImage image = img;
         int downscalePixels = 0;
         if (кутБовтання > 0) {
-            downscalePixels = Math.abs(кутБовтання * 16 - (int) (System.currentTimeMillis() / 4 % (кутБовтання * 32)));
+            int speed = кутБовтання < 8 ? (64 - кутБовтання * 8) : 4;
+            downscalePixels = Math.abs(кутБовтання * 16 - (int) (System.currentTimeMillis() / speed % (кутБовтання * 32)));
             if (downscalePixels > image.getWidth() / 2) {
                 downscalePixels = image.getWidth() / 2;
             }
