@@ -74,7 +74,14 @@ public class КомпонентПолеТетрісу implements Компоне�
         }
 
         BufferedImage image = img;
-
+        int downscalePixels = 0;
+        if (кутБовтання > 0) {
+            downscalePixels = Math.abs(кутБовтання * 16 - (int) (System.currentTimeMillis() / 4 % (кутБовтання * 32)));
+            if (downscalePixels > image.getWidth() / 2) {
+                downscalePixels = image.getWidth() / 2;
+            }
+            image = УтилітиЗображень.toBufferedImage(image.getScaledInstance(image.getWidth() - downscalePixels, image.getHeight() - downscalePixels, Image.SCALE_SMOOTH));
+        }
         if (кутБовтання > 0) {
             int кут;
             if (кутБовтання >= 30) {
@@ -83,9 +90,9 @@ public class КомпонентПолеТетрісу implements Компоне�
                 int коливання = 100 - Math.abs(200 - (int) (System.currentTimeMillis() / 4 % 400));
                 кут = кутБовтання * коливання / 50;
             }
-            image = УтилітиЗображень.оберт(img, кут);
+            image = УтилітиЗображень.оберт(image, кут);
         }
-        g.drawImage(image, 0, 0, null);
+        g.drawImage(image, downscalePixels / 2, downscalePixels / 2, null);
     }
 
     private void намалюватиФігуру(Graphics графіка, Фігура фігура, int fx, int fy) {
