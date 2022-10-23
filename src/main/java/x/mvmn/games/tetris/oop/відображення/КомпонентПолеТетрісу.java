@@ -27,6 +27,11 @@ public class КомпонентПолеТетрісу implements Компоне�
     @Override
     public void промалювати(Graphics g) {
         Graphics графіка = img.getGraphics();
+        Graphics2D g2 = (Graphics2D) графіка;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
         // Фон
         графіка.setColor(Color.DARK_GRAY);
         графіка.fillRect(відступ_X, відступ_Y, 404, 604);
