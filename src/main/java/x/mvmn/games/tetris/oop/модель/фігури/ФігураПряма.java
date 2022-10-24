@@ -1,12 +1,13 @@
 package x.mvmn.games.tetris.oop.модель.фігури;
 
-import java.awt.*;
+import java.awt.Color;
 
-public class ФігураПряма extends АбстрактнаФігура {
+public class ФігураПряма extends ФігураЗОбертом {
     private boolean повернута = false;
 
-    public ФігураПряма(Color колір) {
-        super(колір);
+    public ФігураПряма(Color колір, int поворот) {
+        super(колір, поворот);
+        this.повернута = поворот != 0;
     }
 
     @Override
@@ -20,8 +21,8 @@ public class ФігураПряма extends АбстрактнаФігура {
     }
 
     @Override
-    public boolean заповненість(int x, int y) {
-        return true;
+    protected int кількістьПоложень() {
+        return 2;
     }
 
     @Override
@@ -36,8 +37,11 @@ public class ФігураПряма extends АбстрактнаФігура {
 
     @Override
     public Фігура обернути() {
-        ФігураПряма обернутаПряма = new ФігураПряма(колір);
-        обернутаПряма.повернута = !повернута;
-        return обернутаПряма;
+        return new ФігураПряма(колір, (поворот + 1) % 2);
+    }
+
+    @Override
+    protected boolean заповненістьВраховуючиОберт(int x, int y) {
+        return true;
     }
 }

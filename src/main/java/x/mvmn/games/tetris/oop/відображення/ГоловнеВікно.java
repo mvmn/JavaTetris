@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ГоловнеВікно extends JFrame {
-//  private static final long serialVersionUID = 8318922323317937630L;
+    private static final long serialVersionUID = 8318922323317937630L;
 
     private static final int ширина = 800;
     private static final int висота = 620;

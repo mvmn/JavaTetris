@@ -30,7 +30,7 @@ public class ФабрикаФігур {
             case 0:
                 return new ФігураКвадрат(колір);
             case 1:
-                return new ФігураПряма(колір);
+                return new ФігураПряма(колір, 0);
             case 2:
                 return new ФігураБукваТ(колір, 1);
             case 3:
