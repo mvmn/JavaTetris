@@ -11,11 +11,13 @@ import x.mvmn.games.tetris.oopexamples.графіка.фігури.Чотири�
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        List<ГеомертичнаФігура> фігури = new ArrayList<>();
+        List<ГеомертичнаФігура> фігури = Collections.synchronizedList(new ArrayList<>());
         фігури.add(new ЗаповненийПрямокутник(new Координати(50, 50), new Координати(130, 80), new Color(200, 200, 200)));
         фігури.add(new Чотирикутник(new Координати(40, 50),
                 new Координати(140, 50),

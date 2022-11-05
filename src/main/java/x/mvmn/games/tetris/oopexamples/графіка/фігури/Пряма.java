@@ -35,7 +35,13 @@ public class Пряма extends ГеомертичнаФігура {
                 точкаА = this.точкаБ;
                 точкаБ = this.точкаА;
             }
-            double коефіцієнт = (double) deltaY / deltaX;
+
+            double коефіцієнт;
+            if (deltaX != 0) {
+                коефіцієнт = (double) deltaY / deltaX;
+            } else {
+                коефіцієнт = 0;
+            }
             int знак = точкаА.getY() <= точкаБ.getY() ? 1 : -1;
             for (int i = 0; i <= (точкаБ.getX() - точкаА.getX()); i++) {
                 int y = (int) (точкаА.getY() + знак * коефіцієнт * i);
@@ -46,7 +52,12 @@ public class Пряма extends ГеомертичнаФігура {
                 точкаА = this.точкаБ;
                 точкаБ = this.точкаА;
             }
-            double коефіцієнт = (double) deltaX / deltaY;
+            double коефіцієнт;
+            if (deltaY != 0) {
+                коефіцієнт = (double) deltaX / deltaY;
+            } else {
+                коефіцієнт = 0;
+            }
             int знак = точкаА.getX() <= точкаБ.getX() ? 1 : -1;
             for (int i = 0; i <= (точкаБ.getY() - точкаА.getY()); i++) {
                 int x = (int) (точкаА.getX() + знак * коефіцієнт * i);

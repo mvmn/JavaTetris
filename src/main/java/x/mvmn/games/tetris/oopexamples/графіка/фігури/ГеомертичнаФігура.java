@@ -17,4 +17,9 @@ public abstract class ГеомертичнаФігура {
     }
 
     public abstract void намалювати(Графіка графіка);
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + ", колір " + колір.getRed() + "/" + колір.getGreen() + "/" + колір.getBlue();
+    }
 }

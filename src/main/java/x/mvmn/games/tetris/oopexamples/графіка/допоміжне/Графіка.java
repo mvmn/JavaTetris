@@ -7,12 +7,15 @@ public class Графіка {
 
     private final Graphics graphics;
 
-    public Графіка(Graphics graphics) {
+    private final int розмірПікселя;
+
+    public Графіка(Graphics graphics, int розмірПікселя) {
         this.graphics = graphics;
+        this.розмірПікселя = розмірПікселя;
     }
 
     public void намалюватиПіксель(int x, int y, Color колір) {
         graphics.setColor(колір);
-        graphics.fillRect(x * 4, y * 4, 4, 4);
+        graphics.fillRect(x * розмірПікселя, y * розмірПікселя, розмірПікселя, розмірПікселя);
     }
 }
