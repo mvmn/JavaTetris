@@ -1,4 +1,4 @@
-package x.mvmn.games.tetris.oopexamples;
+package x.mvmn.games.tetris.oopexamples.тварини;
 
 import x.mvmn.games.tetris.oopexamples.тварини.Качка;
 import x.mvmn.games.tetris.oopexamples.тварини.Кіт;
