@@ -16,4 +16,9 @@ public class Координати {
     public int getY() {
         return y;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d:%d", x, y);
+    }
 }

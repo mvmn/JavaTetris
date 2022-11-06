@@ -44,4 +44,9 @@ public class Прямокутник extends ГеомертичнаФігура {
             лінія.намалювати(графіка);
         }
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + " (" + ліваВерхняТочка + " - " + праваНижняТочка + "), колір " + колір.getRed() + "/" + колір.getGreen() + "/" + колір.getBlue();
+    }
 }

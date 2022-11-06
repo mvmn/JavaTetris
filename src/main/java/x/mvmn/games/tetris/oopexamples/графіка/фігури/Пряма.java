@@ -65,4 +65,9 @@ public class Пряма extends ГеомертичнаФігура {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + " (" + точкаА + " - " + точкаБ + "), колір " + колір.getRed() + "/" + колір.getGreen() + "/" + колір.getBlue();
+    }
 }

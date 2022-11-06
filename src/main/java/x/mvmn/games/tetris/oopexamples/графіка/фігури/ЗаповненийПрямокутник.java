@@ -34,4 +34,9 @@ public class ЗаповненийПрямокутник extends Геомерти
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + " (" + ліваВерхняТочка + " - " + праваНижняТочка + "), колір " + колір.getRed() + "/" + колір.getGreen() + "/" + колір.getBlue();
+    }
 }

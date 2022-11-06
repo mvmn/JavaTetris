@@ -33,4 +33,9 @@ public class Чотирикутник extends Прямокутник {
         лінії[2] = new Пряма(точкаВ, точкаГ);
         лінії[3] = new Пряма(точкаГ, точкаА);
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + " (" + точкаА + ", " + точкаБ + "," + точкаВ + "," + точкаГ + "), колір " + колір.getRed() + "/" + колір.getGreen() + "/" + колір.getBlue();
+    }
 }

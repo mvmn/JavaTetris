@@ -7,6 +7,7 @@ import x.mvmn.games.tetris.oopexamples.графіка.фігури.Прямок�
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -44,6 +45,8 @@ public class ГоловнеВікно {
 
         JComboBox<String> типМалювання = new JComboBox<>(new String[]{"Пряма", "Прямокутник", "Заповнений прямокутник"});
         типМалювання.setBorder(BorderFactory.createTitledBorder("Фігура"));
+        JButton deleteShape = new JButton("Видалити фігуру");
+        deleteShape.setEnabled(false);
 
         JSlider sliderColorRed = new JSlider(0, 255, 255);
         JSlider sliderColorGreen = new JSlider(0, 255, 255);
@@ -103,10 +106,12 @@ public class ГоловнеВікно {
                     sliderAltColorRed.setValue(колір.getRed());
                     sliderAltColorGreen.setValue(колір.getGreen());
                     sliderAltColorBlue.setValue(колір.getBlue());
+                    deleteShape.setEnabled(true);
                 } else {
                     sliderAltColorRed.setEnabled(false);
                     sliderAltColorGreen.setEnabled(false);
                     sliderAltColorBlue.setEnabled(false);
+                    deleteShape.setEnabled(false);
                 }
                 sliderAltColorRed.invalidate();
                 sliderAltColorGreen.invalidate();
@@ -160,7 +165,15 @@ public class ГоловнеВікно {
             }
 
             private Координати координатиМиші(MouseEvent e) {
-                return new Координати(e.getX() / sliderZoom.getValue(), e.getY() / sliderZoom.getValue());
+                int x = e.getX();
+                if (x < 0) {
+                    x = 0;
+                }
+                int y = e.getY();
+                if (y < 0) {
+                    y = 0;
+                }
+                return new Координати(x / sliderZoom.getValue(), y / sliderZoom.getValue());
             }
 
             private void перемалювати() {
@@ -201,6 +214,15 @@ public class ГоловнеВікно {
             component.repaint();
         });
 
+        deleteShape.addActionListener(actEvent -> {
+            if (списокФігур.getSelectedIndex() >= 0) {
+                model.removeElementAt(списокФігур.getSelectedIndex());
+                component.invalidate();
+                component.revalidate();
+                component.repaint();
+            }
+        });
+
         component.setPreferredSize(new Dimension(800, 600));
         JPanel pnlAlterColor = new JPanel(new GridLayout(1, 4));
         pnlAlterColor.add(sliderAltColorRed);
@@ -208,7 +230,7 @@ public class ГоловнеВікно {
         pnlAlterColor.add(sliderAltColorBlue);
         pnlAlterColor.add(altColorPreview);
         pnlAlterColor.setBorder(BorderFactory.createTitledBorder("Колір обраної фігури"));
-        
+
         JPanel topPanel = new JPanel(new GridLayout(2, 3));
         topPanel.add(sliderZoom);
         topPanel.add(типМалювання);
@@ -217,9 +239,13 @@ public class ГоловнеВікно {
         topPanel.add(sliderColorGreen);
         topPanel.add(sliderColorBlue);
 
+        JPanel rightPanel = new JPanel(new BorderLayout());
+        rightPanel.add(new JScrollPane(списокФігур), BorderLayout.CENTER);
+        rightPanel.add(deleteShape, BorderLayout.SOUTH);
+
         вікно.getContentPane().setLayout(new BorderLayout());
         вікно.getContentPane().add(new JScrollPane(component), BorderLayout.CENTER);
-        вікно.getContentPane().add(new JScrollPane(списокФігур), BorderLayout.EAST);
+        вікно.getContentPane().add(rightPanel, BorderLayout.EAST);
         вікно.getContentPane().add(pnlAlterColor, BorderLayout.SOUTH);
         вікно.getContentPane().add(topPanel, BorderLayout.NORTH);
 
