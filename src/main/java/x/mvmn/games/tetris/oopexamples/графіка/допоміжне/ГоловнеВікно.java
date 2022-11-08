@@ -88,11 +88,11 @@ public class ГоловнеВікно {
         sliderAltColorGreen.setBorder(BorderFactory.createTitledBorder("Зелений"));
         sliderAltColorBlue.setBorder(BorderFactory.createTitledBorder("Синій"));
 
-        DefaultListModel<ГеомертичнаФігура> model = new DefaultListModel<>();
+        DefaultListModel<ГеомертичнаФігура> даніСпискуФігур = new DefaultListModel<>();
         for (ГеомертичнаФігура фігура : фігури) {
-            model.addElement(фігура);
+            даніСпискуФігур.addElement(фігура);
         }
-        JList<ГеомертичнаФігура> списокФігур = new JList<>(model);
+        JList<ГеомертичнаФігура> списокФігур = new JList<>(даніСпискуФігур);
         списокФігур.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         списокФігур.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -127,8 +127,8 @@ public class ГоловнеВікно {
                 graphics.fillRect(0, 0, 800 * zoom, 600 * zoom);
 
                 Графіка графіка = new Графіка(graphics, sliderZoom.getValue());
-                for (int i = 0; i < model.getSize(); i++) {
-                    model.getElementAt(i).намалювати(графіка);
+                for (int i = 0; i < даніСпискуФігур.getSize(); i++) {
+                    даніСпискуФігур.getElementAt(i).намалювати(графіка);
                 }
                 if (поточнаФігура != null) {
                     поточнаФігура.намалювати(графіка);
@@ -149,7 +149,7 @@ public class ГоловнеВікно {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if (поточнаФігура != null) {
-                    model.addElement(поточнаФігура);
+                    даніСпискуФігур.addElement(поточнаФігура);
                     перемалювати();
                 }
                 початок = null;
@@ -216,7 +216,7 @@ public class ГоловнеВікно {
 
         deleteShape.addActionListener(actEvent -> {
             if (списокФігур.getSelectedIndex() >= 0) {
-                model.removeElementAt(списокФігур.getSelectedIndex());
+                даніСпискуФігур.removeElementAt(списокФігур.getSelectedIndex());
                 component.invalidate();
                 component.revalidate();
                 component.repaint();
