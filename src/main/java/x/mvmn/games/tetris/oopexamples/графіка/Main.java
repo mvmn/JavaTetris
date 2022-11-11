@@ -6,14 +6,12 @@ import x.mvmn.games.tetris.oopexamples.графіка.фігури.Геомер�
 import x.mvmn.games.tetris.oopexamples.графіка.фігури.ЗаповненийПрямокутник;
 import x.mvmn.games.tetris.oopexamples.графіка.фігури.Крапка;
 import x.mvmn.games.tetris.oopexamples.графіка.фігури.Пряма;
-import x.mvmn.games.tetris.oopexamples.графіка.фігури.Прямокутник;
 import x.mvmn.games.tetris.oopexamples.графіка.фігури.Чотирикутник;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Main {
     public static void main(String[] args) {
