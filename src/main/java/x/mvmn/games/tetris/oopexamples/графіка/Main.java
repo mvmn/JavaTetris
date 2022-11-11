@@ -16,7 +16,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<ГеомертичнаФігура> фігури = Collections.synchronizedList(new ArrayList<>());
-        фігури.add(new ЗаповненийПрямокутник(new Координати(50, 50), new Координати(130, 80), new Color(200, 200, 200)));
+        фігури.add(new ЗаповненийПрямокутник(new Координати(50, 50), new Координати(130, 80), new Color(155, 154, 144)));
         фігури.add(new Чотирикутник(new Координати(40, 50),
                 new Координати(140, 50),
                 new Координати(130, 40),

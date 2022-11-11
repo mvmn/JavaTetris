@@ -7,9 +7,8 @@ import java.awt.Color;
 
 public class Прямокутник extends ГеомертичнаФігура {
 
-    private final Координати ліваВерхняТочка;
-
-    private final Координати праваНижняТочка;
+    protected final Координати ліваВерхняТочка;
+    protected final Координати праваНижняТочка;
     protected Пряма[] лінії = new Пряма[4];
 
     public Прямокутник(Координати ліваВерхняТочка, Координати праваНижняТочка) {
