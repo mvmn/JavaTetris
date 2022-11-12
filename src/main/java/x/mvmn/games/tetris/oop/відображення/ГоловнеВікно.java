@@ -2,8 +2,12 @@ package x.mvmn.games.tetris.oop.відображення;
 
 import x.mvmn.games.tetris.oop.сервіс.СлухачВводуКористувача;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;

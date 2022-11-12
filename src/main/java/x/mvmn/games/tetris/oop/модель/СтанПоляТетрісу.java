@@ -2,7 +2,7 @@ package x.mvmn.games.tetris.oop.модель;
 
 import x.mvmn.games.tetris.oop.модель.фігури.Фігура;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class СтанПоляТетрісу {
 

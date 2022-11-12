@@ -1,11 +1,5 @@
 package x.mvmn.games.tetris.oopexamples.тварини;
 
-import x.mvmn.games.tetris.oopexamples.тварини.Качка;
-import x.mvmn.games.tetris.oopexamples.тварини.Кіт;
-import x.mvmn.games.tetris.oopexamples.тварини.Риба;
-import x.mvmn.games.tetris.oopexamples.тварини.Собака;
-import x.mvmn.games.tetris.oopexamples.тварини.Тварина;
-
 public class Main {
     public static void main(String[] args) {
         Тварина[] тварини = new Тварина[6];

@@ -9,7 +9,7 @@ import x.mvmn.games.tetris.oop.модель.фігури.ФігураЗигза�
 import x.mvmn.games.tetris.oop.модель.фігури.ФігураКвадрат;
 import x.mvmn.games.tetris.oop.модель.фігури.ФігураПряма;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Random;
 
 public class ФабрикаФігур {

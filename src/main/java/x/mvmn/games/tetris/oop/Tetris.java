@@ -3,7 +3,7 @@ package x.mvmn.games.tetris.oop;
 import x.mvmn.games.tetris.oop.відображення.ГоловнеВікно;
 import x.mvmn.games.tetris.oop.сервіс.РушійГри;
 
-import javax.swing.*;
+import javax.swing.SwingUtilities;
 
 public class Tetris {
 

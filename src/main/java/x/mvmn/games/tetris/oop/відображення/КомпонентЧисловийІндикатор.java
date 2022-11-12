@@ -1,6 +1,7 @@
 package x.mvmn.games.tetris.oop.відображення;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 
 public class КомпонентЧисловийІндикатор implements КомпонентВідображення {
 

@@ -1,6 +1,6 @@
 package x.mvmn.games.tetris.oop.модель.фігури;
 
-import java.awt.*;
+import java.awt.Color;
 
 public abstract class ФігураЗОбертом extends АбстрактнаФігура {
 
