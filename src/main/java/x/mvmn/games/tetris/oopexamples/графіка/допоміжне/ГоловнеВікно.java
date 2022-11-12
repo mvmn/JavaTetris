@@ -241,6 +241,7 @@ public class ГоловнеВікно {
         JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.add(new JScrollPane(списокФігур), BorderLayout.CENTER);
         rightPanel.add(deleteShape, BorderLayout.SOUTH);
+        rightPanel.setPreferredSize(new Dimension(300, 0));
 
         вікно.getContentPane().setLayout(new BorderLayout());
         вікно.getContentPane().add(new JScrollPane(component), BorderLayout.CENTER);
