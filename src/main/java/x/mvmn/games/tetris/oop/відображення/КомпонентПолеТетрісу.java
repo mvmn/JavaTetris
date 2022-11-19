@@ -14,7 +14,7 @@ import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-public class КомпонентПолеТетрісу implements КомпонентВідображення {
+public class КомпонентПолеТетрісу extends КомпонентІзФігурою {
 
     private String текст;
     private final СтанПоляТетрісу станПоля;
@@ -59,7 +59,7 @@ public class КомпонентПолеТетрісу implements Компоне�
 
         // Фігура
         if (фігура != null && фігура.фігура() != null) {
-            намалюватиФігуру(графіка, фігура.фігура(), фігура.x(), фігура.y());
+            намалюватиФігуру(графіка, фігура.фігура(), фігура.x()*40 + відступ_X, фігура.y()*40 + відступ_Y);
         }
 
         // Текст
@@ -101,36 +101,7 @@ public class КомпонентПолеТетрісу implements Компоне�
         g.drawImage(image, downscalePixels / 2, downscalePixels / 2, null);
     }
 
-    private void намалюватиФігуру(Graphics графіка, Фігура фігура, int fx, int fy) {
-        for (int y = 0; y < фігура.висота(); y++) {
-            for (int x = 0; x < фігура.ширина(); x++) {
-                if (фігура.заповненість(x, y)) {
-                    замалюватиКвадратик(графіка, фігура.колір(), відступ_X + 40 * x + fx * 40,
-                            відступ_Y + 40 * y + fy * 40, true);
-                }
-            }
-        }
-    }
 
-    private void замалюватиКвадратик(Graphics графіка, Color колір, int x, int y, boolean анімація) {
-        if (анімація) {
-            int animationValue = Math.abs(32 - (int) (System.currentTimeMillis() / 10 % 64));
-            графіка.setColor(колір);
-            графіка.fillRoundRect(x + 4, y + 4, 36, 36, animationValue / 2, animationValue / 2);
-            float[] hsb = Color.RGBtoHSB(колір.getRed(), колір.getGreen(), колір.getBlue(), null);
-            графіка.setColor(Color.getHSBColor(0.5f - hsb[0], 0 + animationValue / 64.f, 1f));
-            графіка.fillRoundRect(x + 8, y + 8, 28, 28, animationValue / 2, animationValue / 2);
-            графіка.setColor(колір);
-            графіка.fillOval(x + 14 + animationValue / 8, y + 14 + animationValue / 8, 16 - animationValue / 4, 16 - animationValue / 4);
-        } else {
-            графіка.setColor(колір);
-            графіка.fillRoundRect(x + 4, y + 4, 36, 36, 8, 8);
-            графіка.setColor(Color.WHITE);
-            графіка.fillRoundRect(x + 8, y + 8, 28, 28, 16, 16);
-            графіка.setColor(колір);
-            графіка.fillOval(x + 14, y + 14, 16, 16);
-        }
-    }
 
     public void текст(String текст) {
         this.текст = текст;
